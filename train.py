@@ -53,17 +53,17 @@ Train Model [optional args]
 
 
 @click.option(
-    '--dr',
-    '--dir'
+    '--dir',
+    '--direct_data'
     help ='dir- to - image'
 )
-def train(learning_rate, batch_size, num_epochs, save_every, tensorboard_vis, print_summary):
+def train(direct_data, learning_rate, batch_size, num_epochs, save_every, tensorboard_vis, print_summary):
     setup_paths()
 
     datagen = keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
 
     get_gen = lambda x: datagen.flow_from_directory(
-        os.path.join(dir,x),
+        os.path.join(direct_data,x),
         target_size=(64, 64),
         batch_size=batch_size,
         class_mode='categorical'
