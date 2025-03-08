@@ -50,14 +50,14 @@ Train Model [optional args]
     is_flag=True,
     help='Flag for printing summary of the model'
 )
-
-
 @click.option(
     '-dir',
     '--direct_data',  
-    help ='dir- to - image'
+    default='',
+    help='dir- to - image'
 )
-def train(direct_data, learning_rate, batch_size, num_epochs, save_every, tensorboard_vis, print_summary):
+
+def train(learning_rate, batch_size, num_epochs, save_every, tensorboard_vis, print_summary, direct_data):
     setup_paths()
 
     datagen = keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
