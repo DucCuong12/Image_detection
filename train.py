@@ -5,7 +5,7 @@ import logging
 import keras
 import numpy as np
 import keras.backend as K
-
+import tensorflow
 from model import create_model
 
 K.set_image_data_format('channels_last')
@@ -60,7 +60,7 @@ Train Model [optional args]
 def train(learning_rate, batch_size, num_epochs, save_every, tensorboard_vis, print_summary, direct_data):
     setup_paths()
 
-    datagen = keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
+    datagen = tensorflow.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
 
     get_gen = lambda x: datagen.flow_from_directory(
         os.path.join(direct_data,x),

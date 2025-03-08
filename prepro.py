@@ -2,7 +2,7 @@ import os
 import dill
 import click
 import logging
-
+import tensorflow
 import h5py
 import keras
 import numpy as np
@@ -44,7 +44,7 @@ Augment Images
 def augment_images(dataset_path):
     categories = os.listdir('{}/train'.format(dataset_path))
 
-    datagen = keras.preprocessing.image.ImageDataGenerator(
+    datagen = tensorflow.keras.preprocessing.image.ImageDataGenerator(
             rotation_range=40,
             width_shift_range=0.2,
             height_shift_range=0.2,
