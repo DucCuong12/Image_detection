@@ -53,8 +53,8 @@ Train Model [optional args]
 
 
 @click.option(
-    '--dir',
-    '--direct_data'
+    '-dir',
+    '--direct_data',  
     help ='dir- to - image'
 )
 def train(direct_data, learning_rate, batch_size, num_epochs, save_every, tensorboard_vis, print_summary):
