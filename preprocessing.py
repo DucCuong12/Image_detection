@@ -14,8 +14,8 @@ class CustomDataset(Dataset):
                 transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])         
             ]
         )
-        self.class_to_idx = None
-        self.idx_to_class = None
+        # self.class_to_idx = None
+        # self.idx_to_class = None
     
     # def mix_data(self, folders):
         for folder in sorted(os.listdir(self.folders)):
@@ -25,18 +25,14 @@ class CustomDataset(Dataset):
                 img_pic = os.path.join(file_path, img)
                 self.file_image.append(img_pic)
                 self.label.append(folder)
+        self.class_to_idx = {label : idx for idx, label in enumerate(sorted(set(self.label)))}
+        # self.idx_to_class = {idx : label for label,idx in self.class_to_idx()}
     def __len__(self):
         return len(self.file_image)
-    def convert(self):
-        self.class_to_idx = {label : idx for idx, label in sorted(set(self.label))}
-        self.idx_to_class = {idx : label for label,idx in self.class_to_idx}
+        
     def __getitem__(self,idx):
         image = Image.open(self.file_image[idx]).convert("RGB")
         label = self.class_to_idx[self.label[idx]]
         if self.transform:
             image = self.transform(image)
-        return image, label        
-    
-            
-        
-        
+        return image, label               
